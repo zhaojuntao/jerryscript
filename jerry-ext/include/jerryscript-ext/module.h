@@ -20,12 +20,15 @@
 
 /**
  * Declare the signature for the module initialization function.
+ * 声明模块初始化函数指针
  */
 typedef jerry_value_t (*jerryx_native_module_on_resolve_t) (void);
 
 /**
  * Declare the structure used to define a module. One should only make use of this structure via the
  * JERRYX_NATIVE_MODULE macro declared below.
+ * 声明用于定义一个模块的结构体。我们应该只使用下面声明的JERRYX_NATIVE_MODULE宏来使用这个结构体。
+ * 这是一个链表，将所有的module连接在一起
  */
 typedef struct jerryx_native_module_t
 {
@@ -37,6 +40,7 @@ typedef struct jerryx_native_module_t
 /**
  * Declare the constructor and destructor attributes. These evaluate to nothing if this extension is built without
  * library constructor/destructor support.
+ * 声明构造函数和析构函数属性。如果此扩展不使用库构造函数/析构函数支持，则这些值将不受影响。
  */
 #ifdef ENABLE_INIT_FINI
 #define JERRYX_MODULE_CONSTRUCTOR_ATTRIBUTE __attribute__((constructor))
@@ -50,6 +54,7 @@ typedef struct jerryx_native_module_t
 
 /**
  * Having two levels of macros allows strings to be used unquoted.
+ * 有两个不同级别的宏，允许字符串被隐式使用
  */
 #define JERRYX_NATIVE_MODULE(module_name, on_resolve_cb)  \
   JERRYX_NATIVE_MODULE_IMPLEM(module_name, on_resolve_cb)
@@ -82,6 +87,7 @@ typedef struct jerryx_native_module_t
 /**
  * Register a native module. This makes it available for loading via jerryx_module_resolve, when
  * jerryx_module_native_resolver is passed in as a possible resolver.
+ * 这使得它可以通过jerryx_module_resolve来加载，当jerryx_module_native_resolver被作为可能的解析器传入时。
  */
 void jerryx_native_module_register (jerryx_native_module_t *module_p);
 
@@ -100,6 +106,7 @@ typedef jerry_value_t (*jerryx_module_get_canonical_name_t) (const jerry_value_t
 
 /**
  * Declare the function pointer type for module resolution.
+ * 声明模块解析的函数指针类型。
  */
 typedef bool (*jerryx_module_resolve_t) (const jerry_value_t canonical_name, /**< The module's canonical name */
                                          jerry_value_t *result); /**< The resulting module, if the function returns
