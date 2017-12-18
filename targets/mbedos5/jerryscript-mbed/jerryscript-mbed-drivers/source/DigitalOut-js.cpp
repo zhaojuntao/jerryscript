@@ -124,10 +124,19 @@ DECLARE_CLASS_FUNCTION(DigitalOut, is_connected) {
  * @param value (optional) Initial value of the DigitalOut.
  * @returns a JavaScript object representing a DigitalOut.
  */
+/**
+jerry_value_t 
+__gen_jsmbed_class_constructor_DigitalOut(const jerry_value_t function_obj, 
+                  const jerry_value_t    this_obj, 
+                  const jerry_value_t    args[], 
+                  const jerry_length_t   args_count)
+
+*/
+
 DECLARE_CLASS_CONSTRUCTOR(DigitalOut) {
-    CHECK_ARGUMENT_COUNT(DigitalOut, __constructor, (args_count == 1 || args_count == 2));
-    CHECK_ARGUMENT_TYPE_ALWAYS(DigitalOut, __constructor, 0, number);
-    CHECK_ARGUMENT_TYPE_ON_CONDITION(DigitalOut, __constructor, 1, number, (args_count == 2));
+    CHECK_ARGUMENT_COUNT(DigitalOut, __constructor, (args_count == 1 || args_count == 2)); //判断参数个数是否符合要求  
+    CHECK_ARGUMENT_TYPE_ALWAYS(DigitalOut, __constructor, 0, number);                      //判断参数0是否是符合要求的类型 
+    CHECK_ARGUMENT_TYPE_ON_CONDITION(DigitalOut, __constructor, 1, number, (args_count == 2)); //判断参数1是否是符合要求的类型
 
     DigitalOut* native_ptr;
 
